@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
           <div className="text-center sm:text-left w-full sm:w-auto min-w-[280px] sm:min-w-[320px] sm:max-w-[420px]">
             <div className="flex items-center gap-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-500/15 text-orange-400 shrink-0">
-                <span className="text-lg font-bold text-orange-400">A</span>
+                <span className="text-lg font-bold text-orange-400">M</span>
               </span>
               <span className="text-lg font-bold text-white shrink-0">My Portfolio</span>
             </div>

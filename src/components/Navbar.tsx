@@ -33,7 +33,7 @@ export const Navbar: React.FC = () => {
     >
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8" aria-label="Main navigation">
         <a className="group flex items-center gap-3" href="#home" aria-label="Adrian D. Avanceña's Portfolio home">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-500/15 text-orange-400">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-orange-500/15 text-orange-400 shrink-0">
             <span className="text-lg font-bold text-orange-400">A</span>
           </span>
           <span className="text-sm font-semibold tracking-wide text-white/90">
