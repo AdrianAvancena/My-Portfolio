@@ -26,7 +26,7 @@ export const Projects: React.FC = () => {
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-white/70">
             Selected work I&apos;ve built. These are real projects I have developed — descriptions
-            and screenshots can be expanded later.
+            and screenshots can be seen below.
           </p>
         </div>
 
