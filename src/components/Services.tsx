@@ -1,4 +1,5 @@
 import React from "react";
+import { Reveal } from "./Reveal";
 import { services } from "../data/services";
 
 export const Services: React.FC = () => {
@@ -17,17 +18,18 @@ export const Services: React.FC = () => {
         </div>
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((s) => (
-            <div
-              key={s.id}
-              className="group rounded-2xl border border-white/10 bg-secondary/40 p-6 transition hover:border-orange-400/30 hover:bg-secondary hover:shadow-xl hover:shadow-orange-500/5"
-            >
+          {services.map((s, i) => (
+            <Reveal delay={i * 60} key={s.id}>
+              <div
+                className="group rounded-2xl border border-white/10 bg-secondary/40 p-6 transition hover:border-orange-400/30 hover:bg-secondary hover:shadow-xl hover:shadow-orange-500/5"
+              >
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500/10 text-orange-400 transition group-hover:bg-orange-500 group-hover:text-white">
                 <s.icon className="h-5 w-5" />
               </span>
               <h3 className="mt-4 text-lg font-semibold text-white">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/70">{s.description}</p>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

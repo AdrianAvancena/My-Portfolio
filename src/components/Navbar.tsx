@@ -16,6 +16,29 @@ const links: NavLink[] = [
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("home");
+
+  // Lightweight scroll-spy: highlight the section currently in view.
+  useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>("section[id]");
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let current = "home";
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            current = entry.target.id;
+          }
+        }
+        setActive(current);
+      },
+      { rootMargin: "-45% 0px -55% 0px" }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -24,9 +47,19 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const closeMenu = () => setOpen(false);
+  const activeHref = `#${active}`;
+
+  const linkClass = (href: string, inline = false) =>
+    `${
+      activeHref === href
+        ? "bg-white/5 text-white"
+        : "text-white/70 hover:text-white hover:bg-white/5"
+    } ${inline ? "rounded-lg px-3 py-2.5" : "rounded-lg px-3 py-2"}`;
+
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-shadow duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 overflow-hidden transition-shadow duration-300 ${
         scrolled || open ? "shadow-lg" : "shadow-sm"
       }`}
       style={{ background: scrolled || open ? "rgba(9,13,24,0.88)" : "rgba(9,13,24,0.55)" }}
@@ -46,7 +79,7 @@ export const Navbar: React.FC = () => {
             <a
               key={l.href}
               href={l.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-white/70 hover:text-white hover:bg-white/5 transition whitespace-nowrap"
+              className={`${linkClass(l.href)} transition whitespace-nowrap`}
             >
               {l.label}
             </a>
@@ -56,13 +89,13 @@ export const Navbar: React.FC = () => {
         <div className="hidden items-center gap-3 sm:flex">
           <a
             href="#projects"
-            className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-orange-500/25 hover:bg-orange-400 hover:shadow-orange-400/30 transition"
+            className="rounded-lg bg-orange-500 px-4 py-2 text-sm font-semibold text-white shadow-md shadow-orange-500/25 transition hover:bg-orange-400 hover:shadow-orange-400/30 active:scale-95"
           >
             View Projects
           </a>
           <a
             href="#contact"
-            className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 hover:bg-white/5 hover:border-white/30 transition"
+            className="rounded-lg border border-white/20 px-4 py-2 text-sm font-semibold text-white/80 transition hover:bg-white/5 hover:border-white/30 active:scale-95"
           >
             Contact Me
           </a>
@@ -88,28 +121,40 @@ export const Navbar: React.FC = () => {
       </nav>
 
       {open && (
-        <div id="mobile-menu" className="overflow-hidden rounded-b-2xl bg-secondary/80 shadow-lg md:hidden">
-          <div className="flex flex-col gap-1 border-t border-white/10 px-5 py-4">
-            {links.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition"
-              >
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#projects"
-              onClick={() => setOpen(false)}
-              className="mt-2 rounded-lg bg-orange-500 px-3 py-2.5 text-center text-sm font-semibold text-white hover:bg-orange-400 transition"
-            >
-              View Projects
-            </a>
-          </div>
-        </div>
+        <div className="fixed inset-0 z-40 bg-black/40 md:hidden" onClick={closeMenu} aria-hidden="true" />
       )}
+
+      {/* Mobile menu — animated open/close via max-height + opacity */}
+      <div
+        id="mobile-menu"
+        className="mobile-menu overflow-hidden rounded-b-2xl bg-secondary/80 shadow-lg md:hidden transition-all duration-300"
+        style={{ maxHeight: open ? 500 : 0 }}
+      >
+        <div
+          className={`flex flex-col gap-1 border-t border-white/10 px-5 py-4 transition-transform duration-300 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
+          style={{ transform: open ? "none" : "translateY(-8px)" }}
+        >
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={closeMenu}
+              className={`${linkClass(l.href, true)} transition ${
+                activeHref === l.href ? "bg-white/5" : ""
+              }`}
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href="#projects"
+            onClick={closeMenu}
+            className="mt-2 rounded-lg bg-orange-500 px-3 py-2.5 text-center text-sm font-semibold text-white transition hover:bg-orange-400 active:scale-95"
+          >
+            View Projects
+          </a>
+        </div>
+      </div>
     </header>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Reveal } from "./Reveal";
 
 const steps = [
   {
@@ -42,7 +43,8 @@ export const Process: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-10 sm:grid-cols-2">
+        <Reveal>
+      <div className="mt-12 grid gap-10 sm:grid-cols-2">
           {steps.map((s) => (
             <div
               key={s.num}
@@ -56,6 +58,7 @@ export const Process: React.FC = () => {
             </div>
           ))}
         </div>
+      </Reveal>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { Reveal } from "./Reveal";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -13,6 +14,7 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="border-t border-white/10 bg-secondary py-12">
+      <Reveal>
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <div className="flex flex-col items-center gap-8 sm:flex-row sm:justify-between">
           <div className="text-center sm:text-left w-full sm:w-auto min-w-[280px] sm:min-w-[320px] sm:max-w-[420px]">
@@ -80,6 +82,7 @@ export const Footer: React.FC = () => {
           All rights reserved. &copy; {year} Adrian D. Avanceña
         </div>
       </div>
+      </Reveal>
     </footer>
   );
 };

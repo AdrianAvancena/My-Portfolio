@@ -1,21 +1,23 @@
 import React from "react";
 import { Photo } from './Photo';
+import { Reveal } from "./Reveal";
 
 export const About: React.FC = () => {
   return (
     <section id="about" className="bg-secondary py-20 sm:py-28">
+      <Reveal>
       <div className="mx-auto max-w-6xl px-6 sm:px-10">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
                   <div className="relative">
-                    <div className="relative mx-auto w-[340px] h-[400px]">
-                                          <div className="absolute inset-0 rounded-2xl bg-[#FF6900]/20 blur-xl" aria-hidden="true" />
-                                          <div className="relative rounded-2xl border-2 border-white/10 bg-secondary/60 overflow-hidden shadow-2xl h-full">
-                                            <Photo alt="About me" fillContainer />
-                                          </div>
-                                          <div className="absolute -bottom-3 -right-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#FF6900] text-xs font-bold text-white shadow-lg shadow-[#FF6900]/25">
-                                            A
-                                          </div>
-                                        </div>
+                    <div className="relative mx-auto max-w-[320px] aspect-[4/5]">
+                      <div className="absolute inset-0 rounded-2xl bg-[#FF6900]/20 blur-xl" aria-hidden="true" />
+                      <div className="relative rounded-2xl border-2 border-white/10 bg-secondary/60 overflow-hidden shadow-2xl h-full w-full">
+                        <Photo alt="About me" fillContainer />
+                      </div>
+                      <div className="absolute -bottom-3 -right-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#FF6900] text-xs font-bold text-white shadow-lg shadow-[#FF6900]/25">
+                        A
+                      </div>
+                    </div>
                     <p className="mt-4 text-center text-xs font-medium uppercase tracking-widest text-muted">Profile</p>
                   </div>
 
@@ -85,6 +87,7 @@ export const About: React.FC = () => {
           </div>
         </div>
       </div>
+      </Reveal>
     </section>
   );
 };

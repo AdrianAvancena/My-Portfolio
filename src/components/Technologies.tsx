@@ -1,5 +1,6 @@
 import React from "react";
 import { technologies } from "../data/technologies";
+import { Reveal } from "./Reveal";
 
 export const Technologies: React.FC = () => {
   return (
@@ -16,17 +17,19 @@ export const Technologies: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-12 flex gap-3 overflow-x-auto pb-4">
+        <Reveal>
+      <div className="mt-12 flex gap-3 overflow-x-auto pb-4">
           {technologies.map((t) => (
             <span
               key={t.name}
-              className="flex items-center gap-2 rounded-xl border border-white/10 bg-secondary/40 px-4 py-2.5 text-sm font-medium text-white/80"
+              className="flex items-center gap-2 rounded-xl border border-white/10 bg-secondary/40 px-4 py-2.5 text-sm font-medium text-white/80 transition-all duration-300 hover:border-[#6E86FF] hover:bg-[#6E86FF] hover:text-white"
             >
               <t.icon className="h-4 w-4" />
               {t.name}
             </span>
           ))}
         </div>
+      </Reveal>
       </div>
     </section>
   );

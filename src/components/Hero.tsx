@@ -12,7 +12,7 @@ export const Hero: React.FC = () => {
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 sm:px-10 lg:grid-cols-2 lg:py-20">
         <div className="text-center lg:text-left">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-muted backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-orange-400 animate-pulse" />
+            <span className="h-2 w-2 rounded-full bg-green-400 animate-pulse" /> 
             Available for freelance work
           </span>
 
